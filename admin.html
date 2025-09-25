@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>HelpDesk Buddy — Admin</title>
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<div class="app admin">
+<header>
+<h1>SwiftDesk: Smart Service Tickets for IT Installations — Admin 🛠️</h1>
+<p class="subtitle">Manage incoming requests with friendly actions</p>
+</header>
+<main>
+<div class="controls">
+<label>Filter:
+<select id="filterStatus">
+<option value="all">All</option>
+<option value="Open">Open</option>
+<option value="In Progress">In Progress</option>
+<option value="Completed">Completed</option>
+<option value="Rejected">Rejected</option>
+</select>
+</label>
+</div>
+
+
+<section id="allTicketsContainer" class="tickets-list">
+
+</section>
+</main>
+
+
+<footer>
+<small>Tip: use friendly comments to keep the experience human.</small>
+</footer>
+</div>
+
+
+<script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>HelpDesk Buddy — Employee</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app">
+    <header>
+      <h1>Service Tickets for Software Installations 🤖</h1>
+      <p class="subtitle">Chat with Buddy to create a software installation request</p>
+    </header>
+
+    <main>
+      <!-- Chat Window -->
+      <section id="chat" class="chat-window"></section>
+
+      <!-- Chat Input -->
+      <form id="chatForm" class="chat-form">
+        <input id="chatInput" autocomplete="off" placeholder="Type your reply here..." />
+        <button type="submit">Send</button>
+      </form>
+
+      <!-- My Tickets -->
+      <section id="myTickets" class="tickets-list">
+        <h2>My Tickets</h2>
+        <div id="myTicketsContainer"></div>
+      </section>
+    </main>
+
+    <footer>
+      <small>Open <strong>admin.html</strong> in another tab to manage tickets.</small>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

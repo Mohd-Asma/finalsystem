@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Login - Tickets</title>
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<div class="login-container">
+  <h1>Login / Register</h1>
+
+  
+  <div id="roleSelection">
+    <p>Select your role:</p>
+    <div class="role-buttons">
+      <button id="employeeBtn" type="button">Employee</button>
+      <button id="adminBtn" type="button">Admin</button>
+    </div>
+    <p class="small">New user? <span id="showRegister" style="cursor:pointer;color:#2563eb;">Register here</span></p>
+  </div>
+
+ 
+  <form id="loginForm" style="display:none;" novalidate>
+    <input type="text" id="username" placeholder="Enter your username" required />  
+    <input type="password" id="password" placeholder="Enter your password" required />
+    <button type="submit">Login</button>
+    <p id="loginError" class="error"></p>
+  </form>
+
+ 
+  <form id="registerForm" style="display:none;" novalidate>
+    <input type="text" id="newUsername" placeholder="Enter new username" required />
+    <input type="password" id="newPassword" placeholder="Enter new password" required />
+    <button type="submit">Register</button>
+    <p id="registerError" class="error"></p>
+  </form>
+</div>
+
+<script src="script.js"></script>
+<script>
+  let selectedRole = null;
+
+  const roleSelection = document.getElementById('roleSelection');
+  const loginForm = document.getElementById('loginForm');
+  const registerForm = document.getElementById('registerForm');
+  const loginError = document.getElementById('loginError');
+  const registerError = document.getElementById('registerError');
+
+  // DEMO USERS
+  const demoUsers = [
+    { username: 'employee', password: 'employee123', role: 'employee' },
+    { username: 'admin', password: 'admin123', role: 'admin' }
+  ];
+
+  // SHOW LOGIN FORM
+  document.getElementById('employeeBtn').addEventListener('click', () => {
+    selectedRole = 'employee';
+    loginForm.style.display = 'block';
+    registerForm.style.display = 'none';
+    roleSelection.style.display = 'none';
+    loginError.textContent = '';
+  });
+
+  document.getElementById('adminBtn').addEventListener('click', () => {
+    selectedRole = 'admin';
+    loginForm.style.display = 'block';
+    registerForm.style.display = 'none';
+    roleSelection.style.display = 'none';
+    loginError.textContent = '';
+  });
+
+  // SHOW REGISTER FORM
+  document.getElementById('showRegister').addEventListener('click', () => {
+    registerForm.style.display = 'block';
+    loginForm.style.display = 'none';
+    roleSelection.style.display = 'none';
+    registerError.textContent = '';
+  });
+
+  // LOGIN FORM SUBMIT
+  loginForm.addEventListener('submit', function(e){
+    e.preventDefault();
+    const password = document.getElementById('password').value.trim();
+
+    // GET REGISTERED USERS
+    const registeredUsers = JSON.parse(localStorage.getItem('users')) || [];
+    const allUsers = demoUsers.concat(registeredUsers);
+
+    const user = allUsers.find(u => u.role === selectedRole && u.password === password);
+    if(user){
+      localStorage.setItem('role', selectedRole);
+      window.location.href = selectedRole === 'admin' ? 'admin.html' : 'dashboard.html';
+    } else {
+      loginError.textContent = 'Incorrect password. Try again.';
+    }
+  });
+
+  // REGISTER FORM SUBMIT
+  registerForm.addEventListener('submit', function(e){
+    e.preventDefault();
+    const username = document.getElementById('newUsername').value.trim();
+    const password = document.getElementById('newPassword').value.trim();
+
+    let users = JSON.parse(localStorage.getItem('users')) || [];
+
+    // Check if username already exists
+    if(users.some(u => u.username === username)){
+      registerError.textContent = 'Username already exists';
+      return;
+    }
+
+    // Add new user as employee
+    users.push({ username, password, role: 'employee' });
+    localStorage.setItem('users', JSON.stringify(users));
+
+    alert('Registration successful! Please login.');
+    window.location.reload();
+  });
+</script>
+</body>
+</html>

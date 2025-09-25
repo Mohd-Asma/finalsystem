@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Login - Service Ticket System</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="login-container">
+    <h1>Service Ticket Login</h1>
+
+    <form id="loginForm" novalidate>
+      <input type="text" id="username" placeholder="Username or email" required />
+      <input type="password" id="password" placeholder="Password" required />
+      <button type="submit">Login</button>
+      <p id="loginError" class="error"></p>
+      <p id="loginHint" class="small">Employee: <b>employee / employee123</b> · Admin: <b>admin / admin123</b></p>
+    </form>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
